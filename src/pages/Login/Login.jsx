@@ -28,13 +28,13 @@ const Login = ({ onLogin }) => {
     const handleLogin = async () => {
         const datalogin = await DataLogin(inputLogin);
         console.log("data: ", datalogin);
-        if (datalogin.data.id) {
+        if (datalogin.data === undefined) {
+            toast.error("Your email or password is wrong.");
+        } else {
             onLogin();
-            navigate("/dashboard");
+            navigate("/homepage");
             toast.success("Welcome to the Star Stream!");
             setInputLogin({ email: "", password: ""});
-        } else {
-            toast.error("Your email or password is wrong.")
         }  
     }
 

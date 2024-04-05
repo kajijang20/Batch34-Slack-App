@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import {
   createBrowserRouter,
   Navigate,
-  Outlet,
   RouterProvider,
 } from "react-router-dom";
 
-//import Sidebar from "../components/Sidebar/Sidebar";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import Sidebar from "../components/Sidebar/Sidebar";
+import Homepage from "../pages/Homepage/Homepage";
+import Friendspage from "../pages/Friendspage/Friendspage";
+import Messagespage from "../pages/Messages/Messages";
 import Login from "../pages/Login/Login";
 
 const AppRouter = () => {
@@ -17,28 +18,36 @@ const AppRouter = () => {
         setIsLoggedIn(true);
     }
 
-    const PrivateRoute = ({ path, element }) => { // can declare outside -- use prop (isLoggedIn)
+    const PrivateRoute = ({ path, element }) => {
         return isLoggedIn ? element : <Navigate to="/login" />;
     }
 
     const router = createBrowserRouter([
         {
-        path: "/",
-        element: <Outlet />, // dont declare sidebar too many times
-        children: [
-        {
-            path: "/dashboard",
+            path: "/homepage",
             element: <PrivateRoute 
-                        path="/dashboard" 
-                        //element={<> <Sidebar /> <Dashboard /> </>} 
-                        element={<Dashboard />} 
+                        path="/homepage"
+                        element={<> <Sidebar /> <Homepage /> </>}
+                     />,
+        },
+        {
+            path: "/friends",
+            element: <PrivateRoute 
+                        path="/friends"
+                        element={<> <Sidebar /> <Friendspage /> </>}
+                     />,
+        },
+        {
+            path: "/messages",
+            element: <PrivateRoute 
+                        path="/messages"
+                        element={<> <Sidebar /> <Messagespage /> </>}
                      />,
         },
         {
             path: "/login",
             element: <Login onLogin={handleLogin} />,
         },
-        ],},
     ]);
 
     return <RouterProvider router={router} />;
