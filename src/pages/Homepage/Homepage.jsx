@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Dashboard.scss";
+import "./Homepage.scss";
 
 /*import { CardChip } from "../../assets/icons.jsx";
 
@@ -13,11 +13,7 @@ import handleNumberFormat from "../../hooks/useHandleNumberFormat.jsx";
 import useBalanceSummary from "../../hooks/useBalanceSummary.jsx";
 */
 
-//import { DataAllUsers } from "../../utils/Data";
-
-//const data = await DataAllUsers();
-
-const Dashboard = () => {
+const Homepage = () => {
     useEffect(() => {
         //console.log("all users: ", data);
     }, []);
@@ -86,10 +82,12 @@ const Dashboard = () => {
     </div>
   ); */
   return(
-    <div>
-        Dashboard
+    <div className="homepage">
+      <div className="homepage-main">
+        Homepage
+      </div>
     </div>
   );
 }
   
-export default Dashboard;
+export default Homepage;

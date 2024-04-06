@@ -1,0 +1,61 @@
+$color-black-1: rgba(36, 36, 36, 1);
+$color-black-2: rgba(36, 36, 36, 0.8);
+$color-yellow-1:rgba(255, 236, 156, 1);
+$color-yellow-2: rgba(233, 152, 0, 1);
+
+.sidebar {
+    width: 60px;
+    height: 100vh;
+    text-align: center;
+    //background-image: url("../../assets/login-pattern.jpg");
+    transition: all 0.3s;
+    margin: -2rem 0 0 -2rem;
+    float: left;  
+
+    .sidebar-overlay {
+        background: $color-black-2;
+        height: 100vh;
+    }
+
+    .sidebar-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem 0 0 0;
+
+        .sidebar-title-logo{
+            margin: 1rem 0 0 0;
+        }
+
+        .sidebar-title-txt {
+            font-size: 0.55rem;
+            margin-top: -0.4rem;
+            font-weight: 700;
+            color: white;
+            mix-blend-mode: difference;
+        }
+    }
+
+    .sidebar-content {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0;
+        font-size: 0.9rem;
+        row-gap: 0.5rem;
+    }
+
+    .item-link, button {
+        cursor: pointer;
+    }
+
+    .item-link {
+        text-decoration: none;
+        color: white;
+    }
+
+    .selected {
+        text-shadow: 3px 3px 15px $color-yellow-1, -2px 1px 25px $color-yellow-2;
+        //font-weight: 700;
+        //opacity: 0.9;
+    }
+}
