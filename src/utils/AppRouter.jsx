@@ -7,7 +7,7 @@ import {
 
 import Sidebar from "../components/Sidebar/Sidebar";
 import Homepage from "../pages/Homepage/Homepage";
-import Friendspage from "../pages/Friendspage/Friendspage";
+import Channelspage from "../pages/Channelspage/Channelspage";
 import Messagespage from "../pages/Messages/Messages";
 import Login from "../pages/Login/Login";
 
@@ -31,10 +31,10 @@ const AppRouter = () => {
                      />,
         },
         {
-            path: "/friends",
+            path: "/channels",
             element: <PrivateRoute 
-                        path="/friends"
-                        element={<> <Sidebar /> <Friendspage /> </>}
+                        path="/channels"
+                        element={<> <Sidebar /> <Channelspage /> </>}
                      />,
         },
         {

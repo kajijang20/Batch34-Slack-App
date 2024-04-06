@@ -5,12 +5,17 @@ import "./Login.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { DataSignup, DataLogin } from "../../utils/Api";
+import { DataSignup } from "../../utils/Api";
 import { SiteLogo } from "../../assets/icons";
 
-import { handleCreateUser } from "../../components/CreateUser.jsx/CreateUser";
+import { handleCreateUser } from "../../components/CreateUser/CreateUser";
+import userId from "../../components/FindUserId/FindUserId";
 
 const Login = ({ onLogin }) => {
+    localStorage.setItem("headers", "");
+    localStorage.setItem("UserId", "");
+    localStorage.setItem("UserChannels", "");
+    
     const [inputLogin, setInputLogin] = useState({
         email: "",
         password: "",
@@ -25,16 +30,17 @@ const Login = ({ onLogin }) => {
     const [isLoginForm, setIsLoginForm] = useState(true);
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
-        const datalogin = await DataLogin(inputLogin);
-        console.log("data: ", datalogin);
-        if (datalogin.data === undefined) {
-            toast.error("Your email or password is wrong.");
-        } else {
+    const handleLogin = async() => {
+        const id = await userId(inputLogin);
+        //console.log("user Id: ", id);
+        localStorage.setItem("UserId", JSON.stringify(id));
+        if (id) {
             onLogin();
             navigate("/homepage");
             toast.success("Welcome to the Star Stream!");
-            setInputLogin({ email: "", password: ""});
+            setInputLogin({ email: "", password: ""})
+        } else {
+            toast.error("Your email or password is wrong.");
         }  
     }
 
@@ -72,15 +78,15 @@ const Login = ({ onLogin }) => {
     const handleInput = (event) => {
         const { name, value } = event.target;
         if (isLoginForm) {
-          setInputLogin({
-            ...inputLogin,
-            [name]: value,
-          });
+            setInputLogin({
+                ...inputLogin,
+                [name]: value,
+            });
         } else {
-          setInputSignup({
-            ...inputSignup,
-            [name]: value,
-          });
+            setInputSignup({
+                ...inputSignup,
+                [name]: value,
+            });
         }
     };
     
@@ -104,78 +110,78 @@ const Login = ({ onLogin }) => {
                 </div>
 
                 <div className={`login-wrap ${isLoginForm ? "login-wrap-front" : "login-wrap-back"}`}>
-          {isLoginForm ? (
-            <div className="login-wrap">
-              <div className="login-wrap-front">
-                <div className="login-details">
-                  <h2 className="login-title"> Login </h2>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="email"
-                    value={inputLogin.email}
-                    className="login-email-txt"
-                    autoComplete="off"
-                    onChange={handleInput}
-                    onKeyPress={handleKeyPressLogin}
-                  />
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={inputLogin.password}
-                    className="login-password-txt"
-                    onChange={handleInput}
-                    onKeyPress={handleKeyPressLogin}
-                  />
-                  <button onClick={handleLogin} className="login-btn">
-                    Login
-                  </button>
-                </div>
-              </div>
+                {isLoginForm ? (
+                    <div className="login-wrap">
+                        <div className="login-wrap-front">
+                            <div className="login-details">
+                                <h2 className="login-title"> Login </h2>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="email"
+                                    value={inputLogin.email}
+                                    className="login-email-txt"
+                                    autoComplete="off"
+                                    onChange={handleInput}
+                                    onKeyPress={handleKeyPressLogin}
+                                />
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="password"
+                                    value={inputLogin.password}
+                                    className="login-password-txt"
+                                    onChange={handleInput}
+                                    onKeyPress={handleKeyPressLogin}
+                                />
+                            <button onClick={handleLogin} className="login-btn">
+                                Login
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="login-wrap">
+                        <div className="login-wrap-back">
+                            <div className="signup-details">
+                                <h2 className="signup-title"> Sign-up </h2>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder="email"
+                                    value={inputSignup.email}
+                                    className="signup-email-txt"
+                                    autoComplete="off"
+                                    onChange={handleInput}
+                                    onKeyPress={handleKeyPressSignup}
+                                />
+                                <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="password"
+                                    value={inputSignup.password}
+                                    className="signup-password-txt"
+                                    onChange={handleInput}
+                                    onKeyPress={handleKeyPressSignup}
+                                />
+                                <input
+                                    type="password"
+                                    name="password_confirmation"
+                                    placeholder="retype password"
+                                    value={inputSignup.password_confirmation}
+                                    className="signup-password-txt"
+                                    onChange={handleInput}
+                                    onKeyPress={handleKeyPressSignup}
+                                />
+                                <button onClick={handleSignup} className="signup-btn">
+                                    Sign-up
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
-          ) : (
-            <div className="login-wrap">
-              <div className="login-wrap-back">
-                <div className="signup-details">
-                  <h2 className="signup-title"> Sign-up </h2>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="email"
-                    value={inputSignup.email}
-                    className="signup-email-txt"
-                    autoComplete="off"
-                    onChange={handleInput}
-                    onKeyPress={handleKeyPressSignup}
-                  />
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={inputSignup.password}
-                    className="signup-password-txt"
-                    onChange={handleInput}
-                    onKeyPress={handleKeyPressSignup}
-                  />
-                  <input
-                    type="password"
-                    name="password_confirmation"
-                    placeholder="retype password"
-                    value={inputSignup.password_confirmation}
-                    className="signup-password-txt"
-                    onChange={handleInput}
-                    onKeyPress={handleKeyPressSignup}
-                  />
-                  <button onClick={handleSignup} className="signup-btn">
-                    Sign-up
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
-      </div>
     </div>
     );
 };

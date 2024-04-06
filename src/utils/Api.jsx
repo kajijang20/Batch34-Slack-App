@@ -1,24 +1,21 @@
 const base_url = "http://206.189.91.54/api/v1/";
+
 const headers = JSON.parse(localStorage.getItem("headers"));
 
 export const DataSignup = async (input) => {
-    try {
-        const response = await fetch(`${base_url}/auth/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(input)
-        });
+    const response = await fetch(`${base_url}/auth/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+    });
 
-        if (response.ok) {
-            const data = await response.json();
-            return data;
-        } else {
-            console.error("cannot create user.", response.statusText);
-        }
-    } catch (error) {
-        console.error("Error in creating a user: ", error.message);
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        console.error("cannot create user.", response.statusText);
     }
 }
 
@@ -28,7 +25,7 @@ export const DataLogin = async ({email, password}) => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
     });
 
     const headers = {
@@ -49,7 +46,7 @@ export const DataSendMessage = async ({ receiver_id, receiver_class, body }) => 
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ receiver_id, receiver_class, body })
+        body: JSON.stringify({ receiver_id, receiver_class, body }),
     });
     const data = await response.json();
     return data;
@@ -62,7 +59,7 @@ export const DataRetrieveMessage = async ({ receiver_id, receiver_class }) => {
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ receiver_id, receiver_class })
+        body: JSON.stringify({ receiver_id, receiver_class }),
     });
     const data = await response.json();
     return data;
@@ -75,7 +72,7 @@ export const DataCreateChannel = async ({ name, user_ids }) => {
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ name, user_ids })
+        body: JSON.stringify({ name, user_ids }),
     });
     const data = await response.json();
     return data;
@@ -100,7 +97,7 @@ export const DataChannelDetails = async ({ id }) => {
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ id })
+        body: JSON.stringify({ id }),
     });
     const data = await response.json();
     return data;
@@ -113,7 +110,7 @@ export const DataAddMem = async ({ id, member_id }) => {
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ id, member_id })
+        body: JSON.stringify({ id, member_id }),
     });
     const data = await response.json();
     return data;
