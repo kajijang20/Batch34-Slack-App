@@ -2,45 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Channelspage.scss";
 
-import ListChannels from "../../components/ListChannels/ListChannels";
+import { DataChannelDetails } from "../../utils/Api";
+
+import DisplayChannelsList from "../../components/DisplayChannelsList/DisplayChannelsList";
+import DisplayMessages from "../../components/DisplayMessages/DisplayMessages";
 
 const Channelspage = () => {
-    // const [channels, setChannels] = useState([]);
-    // const [currentPage, setCurrentPage] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const channelsData = await FindChannels();
-    //         setChannels(channelsData);
-    //         console.log("all channel users: ", channelsData);
-    //     }
-    //     fetchData();
-    // }, []);
-
-    // const handleItemClick = (item) => {
-    //     setCurrentPage(item.name);
-    // }
-
-    // return(
-    //     <div className="channels">
-    //         <div className="channels-main">
-    //             channelspage
-    //             {channels.map((item) => (
-    //                 <Link className="item-link"
-    //                     key={item.id}
-    //                     to={"/channels/" + item.name}
-    //                     onClick={() => handleItemClick(item)}
-    //                 >
-    //                 <p className={currentPage === item.name ? 'selected' : ''}>
-    //                     {item.name}
-    //                 </p>
-    //                 </Link>
-    //             ))}
-    //         </div>
-    //     </div>
-    // )
     return (
-        <ListChannels />
+        <div className="channels-page">
+            <div className="channels-page-sidebar">
+                <DisplayChannelsList />
+            </div>
+            <div className="channels-page-chat">
+                <DisplayMessages receiver="Channel"/>
+            </div>
+        </div>
+        
     );   
 }
   
