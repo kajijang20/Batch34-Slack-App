@@ -53,13 +53,23 @@ export const DataSendMessage = async ({ receiver_id, receiver_class, body }) => 
 }
 
 export const DataRetrieveMessage = async ({ receiver_id, receiver_class }) => {
-    const response = await fetch(`${base_url}/messages?receiver_id=${receiver_id}`, {
+    const response = await fetch(`${base_url}/messages?receiver_id=${receiver_id}&receiver_class=${receiver_class}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ receiver_id, receiver_class }),
+    });
+    const data = await response.json();
+    return data;
+}
+
+export const DataRecentMessage = async () => {
+    const response = await fetch(`${base_url}/users/recent`, {
+        headers: {
+            "Content-Type": "application/json",
+            ...headers,
+        },
     });
     const data = await response.json();
     return data;
@@ -97,7 +107,6 @@ export const DataChannelDetails = async ({ id }) => {
             "Content-Type": "application/json",
             ...headers,
         },
-        body: JSON.stringify({ id }),
     });
     const data = await response.json();
     return data;

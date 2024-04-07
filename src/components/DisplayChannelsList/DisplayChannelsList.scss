@@ -8,9 +8,21 @@ $color-yellow-2: rgba(233, 152, 0, 1);
     text-align: left;
     //background-image: url("../../assets/login-pattern.jpg");
     background: $color-black;
-    margin: -2rem 0 0 0;
-    padding: 1rem 0 0 1rem;
+    margin: 0;
+    padding: 0 0 0 1rem;
     float: left;  
+
+    .channels-header {
+        display: flex; 
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1rem 0 0 0;
+
+        .channels-btn {
+            margin: 1.2rem 0;
+            cursor: pointer;
+        }
+    }
 
     .channels-content {
         display: flex; 
