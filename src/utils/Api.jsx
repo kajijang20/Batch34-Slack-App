@@ -1,6 +1,6 @@
-const base_url = "http://206.189.91.54/api/v1/";
+import { getHeaders } from "./helper/getHeaders";
 
-const headers = JSON.parse(localStorage.getItem("headers"));
+const base_url = "http://206.189.91.54/api/v1";
 
 export const DataSignup = async (input) => {
     const response = await fetch(`${base_url}/auth/`, {
@@ -44,7 +44,7 @@ export const DataSendMessage = async ({ receiver_id, receiver_class, body }) => 
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
         body: JSON.stringify({ receiver_id, receiver_class, body }),
     });
@@ -57,7 +57,7 @@ export const DataRetrieveMessage = async ({ receiver_id, receiver_class }) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
     });
     const data = await response.json();
@@ -68,7 +68,7 @@ export const DataRecentMessage = async () => {
     const response = await fetch(`${base_url}/users/recent`, {
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
     });
     const data = await response.json();
@@ -80,7 +80,7 @@ export const DataCreateChannel = async ({ name, user_ids }) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
         body: JSON.stringify({ name, user_ids }),
     });
@@ -93,7 +93,7 @@ export const DataAllUserschannels = async () => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
     });
     const data = await response.json();
@@ -105,7 +105,7 @@ export const DataChannelDetails = async ({ id }) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
     });
     const data = await response.json();
@@ -117,7 +117,7 @@ export const DataAddMem = async ({ id, member_id }) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
         body: JSON.stringify({ id, member_id }),
     });
@@ -130,7 +130,7 @@ export const DataAllUsers = async () => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            ...headers,
+            ...getHeaders(),
         },
     });
     const data = await response.json();

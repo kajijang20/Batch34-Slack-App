@@ -1,8 +1,18 @@
 .channels-page {
     
-
     .channels-page-chat {
         display: flex;
-        flex-grow: 1;
+        //flex-grow: 1;
+        flex-direction: column;
+
+        .channels-page-chat-messages {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .channels-page-chat-send {
+            display: flex;
+            flex-grow: 1;
+        }
     }
 }

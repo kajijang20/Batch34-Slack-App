@@ -1,0 +1,65 @@
+$color-black-1: rgba(60, 60, 60, 0.5);
+$color-black-2: rgba(60, 60, 60, 1);
+$color-white-1: rgba(255, 255, 255, 0.3);
+$color-white-2: rgb(245, 233, 255);
+$color-lavender: rgb(141, 151, 220);
+$color-violet: rgba(53, 51, 107, 1);
+
+.messages-sent {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    //background-image: url("../../assets/login-pattern.jpg");
+    background: $color-black-1;
+    padding: 0 1rem;
+    float: left;
+/*
+    .messages-list-header {
+        font-weight: bold;
+        font-size: 2rem;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+*/
+    .messages-sent-main {
+        display: flex;
+        background: $color-white-1;
+        height: 8.4vh;
+        margin: 0.5rem 1rem 1.5rem 1rem;
+        padding: 0 0 1rem 0;
+
+        .message-sent-content {
+            display: flex;
+            width: 100%;
+
+            input {
+                width: 100%;
+                font-size: 1rem;
+                margin: 1rem 0.5rem 1rem 1rem;
+                padding: 1rem;
+                border-radius: 10px;
+                border: none;
+            }        
+    
+            .send-btn {
+                display: block;
+                font-size: 1rem;
+                font-weight: bold;
+                background: $color-lavender;
+                color: $color-black-2;
+                margin: 0.9rem 1rem 0.5rem 0.5rem;
+                padding: 0 1rem;
+                border-radius: 10px;
+                border: none;
+                cursor: pointer;
+                transition: ease 0.4s;
+    
+                &:hover {
+                    background: $color-violet;
+                    color: $color-white-2;
+                }
+            }
+        }
+    }
+}

@@ -1,32 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import "./DisplayMessages.scss";
 
-import FindMessages from '../FindMessages.jsx/FindMessages';
+import FindMessages from "../../utils/helper/getMessages";
 
-const DisplayMessages = (receiver) => {
+const DisplayMessages = ({ receiver }) => {
     const userId = parseInt(localStorage.getItem("UserId")); 
     const [messageList, setMessageList] = useState([]);
-
+    const messagesContainerRef = useRef(null);
+    
     useEffect(() => {
         const fetchMessagesList = async () => {
-            const sentmessages = await FindMessages(receiver.receiver);
-            const updatedMessages = sentmessages.filter((message, index, self) => (self.findIndex(m => m.id === message.id) === index));
-            setMessageList(updatedMessages);
+            const sentmessages = await FindMessages(receiver);
+            const updatedMessages = sentmessages.filter((message) => !messageList.find((m) => m.id === message.id));
+            setMessageList([...messageList, ...updatedMessages]);
+            // scroll down not at the last message but the one before, ok for now
+            if (updatedMessages.length > 0) {
+                messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+            }
         }
-        fetchMessagesList();
-    }, []);
+
+        const interval = setInterval(() => {
+            fetchMessagesList();
+        }, 1000); // Fetch messages every second
+
+        //messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+        return () => clearInterval(interval);
+    }, [receiver, messageList]);    
 
     return (
         <div className="messages-list">
             <div className="messages-list-header">
                 ChatName
             </div>
-            <div className="messages-list-main">
+            <div className="messages-list-main" ref={messagesContainerRef}>
                 {messageList.map((item) => {
                     let position = item.sender.id === userId ? "right" : "left";
                     return (
-                        <div key={item.id} className="messages-content">
-                            <div className={`messages-name ${position}`}>
+                        <div key={item.id} className={`messages-content ${position}`}>
+                            <div className="messages-name">
                                 User ID: {item.sender.id}
                             </div>
                             <div className={`messages-body ${position}`}>

@@ -1,15 +1,12 @@
 $color-black: rgba(60, 60, 60, 0.7);
-$color-yellow-1:rgba(255, 236, 156, 1) ;
-$color-yellow-2: rgba(233, 152, 0, 1);
 
 .channels {
     width: 150px;
     height: 100vh;
     text-align: left;
-    //background-image: url("../../assets/login-pattern.jpg");
     background: $color-black;
     margin: 0;
-    padding: 0 0 0 1rem;
+    padding: 0 0.5rem 0 1rem;
     float: left;  
 
     .channels-header {
@@ -19,7 +16,8 @@ $color-yellow-2: rgba(233, 152, 0, 1);
         padding: 1rem 0 0 0;
 
         .channels-btn {
-            margin: 1.2rem 0;
+            margin: 1.3rem 0;
+            font-weight: bold;
             cursor: pointer;
         }
     }
@@ -45,11 +43,5 @@ $color-yellow-2: rgba(233, 152, 0, 1);
         text-decoration: none;
         color: white;
         cursor: pointer;
-    }
-
-    .selected {
-        text-shadow: 3px 3px 15px $color-yellow-1, -2px 1px 25px $color-yellow-2;
-        //font-weight: 700;
-        //opacity: 0.9;
     }
 }
