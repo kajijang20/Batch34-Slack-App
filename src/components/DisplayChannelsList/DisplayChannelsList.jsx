@@ -10,8 +10,12 @@ const DisplayChannelsList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const channelData = await FindChannels();
-            setChannels(channelData);
+            try {
+                const channelData = await FindChannels();
+                setChannels(channelData);
+            } catch (error) {
+                console.error(error)
+            }
         }
         fetchData();
     }, []);

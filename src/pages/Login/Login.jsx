@@ -33,12 +33,12 @@ const Login = ({ onLogin }) => {
     const handleLogin = async() => {
         const id = await userId(inputLogin);
         //console.log("user Id: ", id);
-        localStorage.setItem("UserId", JSON.stringify(id));
         if (id) {
             onLogin();
             navigate("/homepage");
             toast.success("Welcome to the Star Stream!");
             setInputLogin({ email: "", password: ""})
+            localStorage.setItem("UserId", JSON.stringify(id));
         } else {
             toast.error("Your email or password is wrong.");
         }  
