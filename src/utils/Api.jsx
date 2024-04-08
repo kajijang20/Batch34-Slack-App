@@ -1,10 +1,10 @@
+import { getHeaders } from "./getHeaders";
+
 // Remove last slash
 const base_url = "http://206.189.91.54/api/v1";
 
 // SAFE PARSING
 const headers = JSON.parse(localStorage.getItem("headers") || "{}");
-
-export const getHeaders = () => JSON.parse(localStorage.getItem("headers") || "{}");
 
 export const DataSignup = async (input) => {
     const response = await fetch(`${base_url}/auth/`, {

@@ -10,7 +10,7 @@ import Homepage from "../pages/Homepage/Homepage";
 import Channelspage from "../pages/Channelspage/Channelspage";
 import Messagespage from "../pages/Messages/Messages";
 import Login from "../pages/Login/Login";
-import { getHeaders } from "./Api";
+import { getHeaders } from "./getHeaders";
 
 const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(getHeaders());
