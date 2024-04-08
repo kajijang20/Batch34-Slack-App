@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 
 import { SidebarLogo, HomeIcon, FriendsIcon, MessagesIcon, LogoutIcon } from "../../assets/icons";
-import HandleLogout from "../HandleLogout/HandleLogout";
+import HandleLogout from "../../utils/helper/handleLogout";
 
 const NavItems = [
     {

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import "./Channelspage.scss";
-
-import { DataChannelDetails } from "../../utils/Api";
 
 import DisplayChannelsList from "../../components/DisplayChannelsList/DisplayChannelsList";
 import DisplayMessages from "../../components/DisplayMessages/DisplayMessages";
+import SendMessages from "../../components/SendMessages/SendMessages";
 
 const Channelspage = () => {
 
@@ -15,7 +13,12 @@ const Channelspage = () => {
                 <DisplayChannelsList />
             </div>
             <div className="channels-page-chat">
-                <DisplayMessages receiver="Channel"/>
+                <div className="channels-page-chat-messages">
+                    <DisplayMessages receiver="User"/>
+                </div>
+                <div className="channels-page-chat-send">
+                    <SendMessages receiver="User"/>
+                </div>
             </div>
         </div>
         

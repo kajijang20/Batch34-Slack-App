@@ -1,4 +1,4 @@
-import { DataLogin } from "../../utils/Api";
+import { DataLogin } from "../Api";
 
 const userId = async (inputLogin) => {
     const data = await DataLogin(inputLogin);

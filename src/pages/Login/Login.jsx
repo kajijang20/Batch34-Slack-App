@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { DataSignup } from "../../utils/Api";
 import { SiteLogo } from "../../assets/icons";
 
-import { handleCreateUser } from "../../components/CreateUser/CreateUser";
-import userId from "../../components/FindUserId/FindUserId";
+import { handleCreateUser } from "../../utils/helper/handleCreateUser";
+import userId from "../../utils/helper/getCurrentUserId";
 
 const Login = ({ onLogin }) => {
     localStorage.setItem("headers", "");
@@ -32,12 +32,12 @@ const Login = ({ onLogin }) => {
 
     const handleLogin = async() => {
         const id = await userId(inputLogin);
-        //console.log("user Id: ", id);
-        localStorage.setItem("UserId", JSON.stringify(id));
+        
         if (id) {
             onLogin();
             navigate("/homepage");
             toast.success("Welcome to the Star Stream!");
+            localStorage.setItem("UserId", JSON.stringify(id));
             setInputLogin({ email: "", password: ""})
         } else {
             toast.error("Your email or password is wrong.");
