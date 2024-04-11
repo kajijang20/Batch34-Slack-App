@@ -11,7 +11,6 @@ const DisplayChat = ({ recipientId, receiver, chatname }) => {
     
     useEffect(() => {
         const fetchMessagesList = async () => {
-            let chatname = localStorage.getItem("ChatName") || "";
             const sentmessages = await getMessages({ recipientId, receiver });
             if (sentmessages) {
                 const updatedMessages = sentmessages.filter((message) => !messageList.find((m) => m.id === message.id));
@@ -21,19 +20,18 @@ const DisplayChat = ({ recipientId, receiver, chatname }) => {
                 }
             }
         }
-        //fetchMessagesList();
         const interval = setInterval(() => {
             fetchMessagesList();
         }, 1000); // Fetch messages every second
     
         return () => clearInterval(interval);
-    }, [recipientId, receiver, messageList, chatname]); 
+    }, [recipientId, receiver, messageList]); 
     
     useEffect(() => {
         setMessageList([]);
     }, [recipientId, receiver]);
 
-    console.log("messageList: ", messageList);
+    //console.log("message list: ", messageList);
 
     return (
         <div className="messages-list">
@@ -43,28 +41,19 @@ const DisplayChat = ({ recipientId, receiver, chatname }) => {
             <div className="messages-list-main" ref={messagesContainerRef}>
             {messageList.map((item) => {
                 let position = item.sender.id === userId ? "right" : "left";
-                if (messageList.length > 0) {
-                    return (
-                        <div key={item.id} className={`messages-content ${position}`}>
-                            <div className="messages-name">
-                                User ID: {item.sender.id}
-                            </div>
-                            <div className={`messages-body ${position}`}>
-                                {item.body}
-                            </div>
-                            <div className="messages-time">
-                                {getDateMessage(item.created_at)}    
-                            </div> 
+                return (
+                    <div key={item.id} className={`messages-content ${position}`}>
+                        <div className="messages-name">
+                        User ID: {item.sender.id}
                         </div>
-                    );
-                } else {
-                    return (
-                        <div classname="message-content">
-                            This stream is lonely, why not send a message?
+                        <div className={`messages-body ${position}`}>
+                            {item.body}
                         </div>
-                    );
-                }
-                
+                        <div className="messages-time">
+                            {getDateMessage(item.created_at)}    
+                        </div> 
+                    </div>
+                );                
             })}
             </div>
         </div>

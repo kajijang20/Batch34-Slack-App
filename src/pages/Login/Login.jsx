@@ -12,12 +12,6 @@ import { handleCreateUser } from "../../utils/helper/handleCreateUser";
 import userId from "../../utils/helper/getCurrentUserId";
 
 const Login = ({ onLogin }) => {
-    localStorage.setItem("headers", "");
-    localStorage.setItem("UserId", "");
-    localStorage.setItem("UserChannels", "");
-    localStorage.setItem("RecipientId", "");
-    localStorage.setItem("ChatName", "ChatName");
-    
     const [inputLogin, setInputLogin] = useState({
         email: "",
         password: "",
@@ -37,7 +31,7 @@ const Login = ({ onLogin }) => {
         
         if (id) {
             onLogin();
-            navigate("/homepage");
+            navigate("/channels");
             toast.success("Welcome to the Star Stream!");
             localStorage.setItem("UserId", JSON.stringify(id));
             setInputLogin({ email: "", password: ""})
@@ -91,6 +85,15 @@ const Login = ({ onLogin }) => {
             });
         }
     };
+
+    localStorage.setItem("headers", "");
+    localStorage.setItem("UserId", "");
+    localStorage.setItem("UserChannels", null);
+    localStorage.setItem("DmList", null);
+    //localStorage.setItem("RecipientChannelId", "");
+    //localStorage.setItem("ChatName", "ChatName");
+    //localStorage.setItem("RecipientUserId", "");
+    //localStorage.setItem("DMName", "DM");
     
     return (
         <div className="login">

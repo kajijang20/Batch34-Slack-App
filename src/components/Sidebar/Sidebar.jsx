@@ -2,19 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 
-import { SidebarLogo, HomeIcon, FriendsIcon, MessagesIcon, LogoutIcon } from "../../assets/icons";
+import { SidebarLogo, HomeIcon, MessagesIcon, LogoutIcon } from "../../assets/icons";
 import HandleLogout from "../../utils/helper/handleLogout";
 
 const NavItems = [
     {
-        url: "/homepage",
-        name: "Homepage",
-        logo: <HomeIcon />,
-    },
-    {
         url: "/channels",
         name: "Channels",
-        logo: <FriendsIcon />,
+        logo: <HomeIcon />,
     },
     {
         url: "/messages",

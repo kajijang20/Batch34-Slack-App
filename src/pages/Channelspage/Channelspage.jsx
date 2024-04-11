@@ -5,12 +5,10 @@ import DisplayChannelsList from "../../components/DisplayChannelsList/DisplayCha
 import DisplayChat from "../../components/DisplayChat/DisplayChat";
 import SendMessages from "../../components/SendMessages/SendMessages";
 
-import { getRecipientId } from "../../utils/helper/getRecipientId";
-import { getChatName } from "../../utils/helper/getChatName";
 
 const Channelspage = () => {
-    const [recipientId, setRecipientId] = useState(getRecipientId());
-    const [chatName, setChatName] = useState(getChatName());
+    const [recipientId, setRecipientId] = useState(0);
+    const [chatName, setChatName] = useState("<Chat Name>");
 
     return (
         <div className="channels-page">

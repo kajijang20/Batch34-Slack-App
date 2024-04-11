@@ -5,43 +5,18 @@ $color-black: rgba(60, 60, 60, 0.7);
     height: 100vh;
     text-align: left;
     background: $color-black;
-    margin: 0;
     padding: 0 0.5rem 0 1rem;
     float: left;  
 
     .dms-header {
-        display: flex; 
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 1rem 0 0 0;
-/*
-        .dms-btn {
-            margin: 1.3rem 0;
-            font-weight: bold;
-            cursor: pointer;
-        }  */
-    }
-/*
-    .dms-content {
-        display: flex; 
-        flex-direction: column;
-        margin-top: 1rem;
-        font-size: 0.8rem;
-        max-height: 11rem;
-        overflow-y: auto;
-
-        p {
-            margin: 0.5rem 0;
-        }
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 2rem 0 0.5rem 0;
     }
 
-    .scrollable {
-        overflow-y: auto;
+    .dms-search {
+        font-size: 0.9rem;
+        margin: 0 0.5rem 0 0;
+        overflow-x: hidden;
     }
-
-    .item-link {
-        text-decoration: none;
-        color: white;
-        cursor: pointer;
-    } */
 }
