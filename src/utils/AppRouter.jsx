@@ -6,11 +6,9 @@ import {
 } from "react-router-dom";
 
 import { getHeaders } from "./helper/getHeaders";
-
 import Sidebar from "../components/Sidebar/Sidebar";
-import Homepage from "../pages/Homepage/Homepage";
 import Channelspage from "../pages/Channelspage/Channelspage";
-import Messagespage from "../pages/Messages/Messages";
+import Messagespage from "../pages/Messagespage/Messagespage";
 import Login from "../pages/Login/Login";
 
 const AppRouter = () => {
@@ -26,32 +24,31 @@ const AppRouter = () => {
 
     const router = createBrowserRouter([
         {
-            path: "/homepage",
-            element: <PrivateRoute 
-                        path="/homepage"
-                        element={<> <Sidebar /> <Homepage /> </>}
-                     />,
-        },
-        {
             path: "/channels",
             element: <PrivateRoute 
                         path="/channels"
                         element={<> <Sidebar /> <Channelspage /> </>}
                      />,
+            children: [
+                {
+                    path: ":channel_id",
+                    element: <> <Sidebar /> <Channelspage /> </>,
+                },
+            ],
         },
-        {
-            path: "/channels/:channel_id",
-            element: <PrivateRoute 
-                        path="/channels/:channel_id"
-                        element={<> <Sidebar /> <Channelspage /> </>}
-                     />,
-        },
+        
         {
             path: "/messages",
             element: <PrivateRoute 
                         path="/messages"
                         element={<> <Sidebar /> <Messagespage /> </>}
                      />,
+            children: [
+                {
+                    path: ":user_id",
+                    element: <> <Sidebar /> <Messagespage /> </>,
+                },
+            ],
         },
         {
             path: "/login",

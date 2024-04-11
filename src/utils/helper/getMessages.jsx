@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
 import { DataRetrieveMessage } from "../Api";
-
 import { getHeaders } from "./getHeaders";
 
 const getMessages = async({ recipientId, receiver }) => {

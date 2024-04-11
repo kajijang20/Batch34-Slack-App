@@ -1,52 +1,44 @@
 import React, { useState, useEffect } from "react";
+//import { Link, useNavigate } from "react-router-dom";
 import "./DisplayDMList.scss";
 
 import { DataAllUsers } from "../../utils/Api";
 import SearchBar from "../Searchbar/Searchbar";
 
 const DisplayDMList = () => {
-    /*
     const [users, setUsers] = useState([]);
-    const [filteredUsers, setFilteredUsers] = useState([]);
-  
+    const [searchTerm, setSearchTerm] = useState("");
+    
+//    const navigate = useNavigate();
+/*
     useEffect(() => {
         const fetchData = async () => {
             const allUsers = await DataAllUsers();
-            console.log("all users: ", allUsers);
             setUsers(allUsers);
-            setFilteredUsers(allUsers);
         }
         fetchData();
     }, []);
-  
-    const handleSearch = (searchTerm) => {
-        const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
-        setFilteredUsers(filteredUsers);
-        console.log("filtered users: ", filteredUsers);
-    }
     
+    console.log("all users: ", users);
+    const filteredUsers = users && users.data ? users.data.filter(user => user.email.includes(searchTerm)) : [];
+    
+
     return (
         <div className="dms">
-            <div className="dms-main">
-                <div className="dms-header">
-                    <h3> Channels </h3>
-                </div>
-                <SearchBar users={users} onSearch={handleSearch} />
-                <ul>
-                    {filteredUsers.map(user => (
-                        <li key={user.id}>{user.name}</li>
-                    ))}
-                </ul>
+            <div className="dms-header">
+                Users List
+            </div>
+            <div className="dms-search">
+                <SearchBar users={users}
+                           onSearch={(searchTerm) => setSearchTerm(searchTerm)}
+                />
+                {filteredUsers.map(user => (
+                    <div key={user.id}>{user.email}</div>
+                ))}
             </div>
         </div>
     );
     */
-   
-    return (
-        <div className="dms">
-            DM wip
-        </div>
-    );
 }
 
 export default DisplayDMList;
