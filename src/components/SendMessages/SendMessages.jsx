@@ -3,15 +3,14 @@ import "./SendMessages.scss";
 
 import { DataSendMessage } from '../../utils/Api';
 
-const SendMessages = ({ receiver }) => {
+const SendMessages = ({ recipientId, receiver }) => {
     const headers = JSON.stringify(localStorage.getItem("headers")); 
-    const id = 3; 
     const [body, setBody] = useState("");
 
     const handleSend = async() => {
         if (body.trim() !== "") {
-            const sendmessage = await DataSendMessage({ receiver_id: id, receiver_class: receiver, body: body });
-            console.log("sent message: ", sendmessage.data);
+            const sendmessage = await DataSendMessage({ receiver_id: recipientId, receiver_class: receiver, body: body });
+            //console.log("sent message: ", sendmessage.data);
             setBody("");
             return sendmessage;
         }

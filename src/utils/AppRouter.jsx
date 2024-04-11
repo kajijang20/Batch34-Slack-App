@@ -5,12 +5,13 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import { getHeaders } from "./helper/getHeaders";
+
 import Sidebar from "../components/Sidebar/Sidebar";
 import Homepage from "../pages/Homepage/Homepage";
 import Channelspage from "../pages/Channelspage/Channelspage";
 import Messagespage from "../pages/Messages/Messages";
 import Login from "../pages/Login/Login";
-import { getHeaders } from "./helper/getHeaders";
 
 const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(getHeaders());
@@ -35,6 +36,13 @@ const AppRouter = () => {
             path: "/channels",
             element: <PrivateRoute 
                         path="/channels"
+                        element={<> <Sidebar /> <Channelspage /> </>}
+                     />,
+        },
+        {
+            path: "/channels/:channel_id",
+            element: <PrivateRoute 
+                        path="/channels/:channel_id"
                         element={<> <Sidebar /> <Channelspage /> </>}
                      />,
         },

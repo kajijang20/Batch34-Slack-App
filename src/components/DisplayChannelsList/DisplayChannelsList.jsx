@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./DisplayChannelsList.scss";
 
 import getChannels from "../../utils/helper/getChannels";
 
-const DisplayChannelsList = () => {
+const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
     const [channels, setChannels] = useState([]);
     const [currentPage, setCurrentPage] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,10 +18,15 @@ const DisplayChannelsList = () => {
     }, []);
 
     const handleItemClick = (item) => {
-        setCurrentPage(item.name);
+        setCurrentPage(item.data.name);
+        setChatName(item.data.name);
+        setRecipientId(item.data.id);
+        navigate(`/channels/${item.data.id}`);
+        localStorage.setItem("RecipientId", JSON.stringify(item.data.id));
+        localStorage.setItem("ChatName", JSON.stringify(item.data.name));
     }
 
-    if (channels !== "[]") {
+    if (channels.length) {
         return (
             <div className="channels">
                 <div className="channels-main">
@@ -32,7 +38,6 @@ const DisplayChannelsList = () => {
                         {channels.map((item) => (
                             <Link className="item-link"
                                 key={item.data.id}
-                                to={item.link}
                                 onClick={() => handleItemClick(item)}
                             >
                             <p className={currentPage === item.name ? "selected" : ""}>
