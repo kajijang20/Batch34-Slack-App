@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { DataRetrieveMessage } from "../Api";
+
 import { getHeaders } from "./getHeaders";
 
-const FindMessages = async(receiver) => {
+const getMessages = async({ recipientId, receiver }) => {
     const headers = getHeaders(); 
-    const id = localStorage.getItem("UserId"); 
-    //const messages = await DataRecentMessage(headers); 
-    //console.log("recent messages: ", messages); 
-    const getmessages = await DataRetrieveMessage({ receiver_id: 3, receiver_class: receiver }); 
-    console.log("retrieve messages: ", getmessages);
-
-    return (getmessages.data);
+    if (recipientId){
+        const messages = await DataRetrieveMessage({ receiver_id: recipientId, receiver_class: receiver }); 
+        //console.log("retrieve messages: ", getmessages);
+        return (messages.data);
+    } else {
+        return;
+    }
 }
 
-export default FindMessages;
+export default getMessages;

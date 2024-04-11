@@ -15,6 +15,8 @@ const Login = ({ onLogin }) => {
     localStorage.setItem("headers", "");
     localStorage.setItem("UserId", "");
     localStorage.setItem("UserChannels", "");
+    localStorage.setItem("RecipientId", "");
+    localStorage.setItem("ChatName", "ChatName");
     
     const [inputLogin, setInputLogin] = useState({
         email: "",
