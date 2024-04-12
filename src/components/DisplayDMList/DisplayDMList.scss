@@ -1,22 +1,75 @@
 $color-black: rgba(60, 60, 60, 0.7);
+$color-white: rgb(225, 228, 255);
+$color-violet: rgba(53, 51, 107, 1);
 
 .dms {
-    width: 150px;
+    width: 200px;
     height: 100vh;
     text-align: left;
     background: $color-black;
     padding: 0 0.5rem 0 1rem;
     float: left;  
 
-    .dms-header {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin: 2rem 0 0.5rem 0;
+    .dms-recent {
+        margin: 3rem 0 0 0;
+
+        .dms-recent-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .dms-recent-list {
+            max-height: 11rem;
+            overflow-y: auto;
+
+            .item-link {
+                text-decoration: none;
+                color: white;
+                cursor: pointer;
+            }
+    
+            p {
+                font-size: 0.85rem;
+                cursor: pointer;
+                overflow-x: hidden;
+            }
+        }
     }
 
-    .dms-search {
-        font-size: 0.9rem;
-        margin: 0 0.5rem 0 0;
-        overflow-x: hidden;
+    .dms-header {
+        display: flex;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 2rem 0 0.5rem 0.5rem;
+    }
+
+    .search-bar {
+        color: $color-white;
+        
+        input {
+            width: 10rem;
+            background: $color-violet;
+            border-radius: 10px;
+            color: $color-white;
+            padding: 0.25rem 0.75rem;
+            border: solid $color-white;
+        }
+    
+        .search-dropdown {
+            max-height: 13rem;
+            overflow-y: auto;
+    
+            .item-link {
+                text-decoration: none;
+                color: white;
+                cursor: pointer;
+            }
+    
+            p {
+                font-size: 1rem;
+                cursor: pointer;
+                overflow-x: hidden;
+            }
+        }
     }
 }

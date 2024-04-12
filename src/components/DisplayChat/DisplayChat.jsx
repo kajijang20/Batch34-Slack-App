@@ -8,30 +8,26 @@ const DisplayChat = ({ recipientId, receiver, chatname }) => {
     const userId = parseInt(localStorage.getItem("UserId"));
     const [messageList, setMessageList] = useState([]);
     const messagesContainerRef = useRef(null);
-    
+
     useEffect(() => {
-        const fetchMessagesList = async () => {
-            const sentmessages = await getMessages({ recipientId, receiver });
-            if (sentmessages) {
-                const updatedMessages = sentmessages.filter((message) => !messageList.find((m) => m.id === message.id));
-                if (updatedMessages.length > 0) {
-                    setMessageList(prevMessages => [...prevMessages, ...updatedMessages]);
-                    messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
-                }
-            }
-        }
+        setMessageList([]); // Reset messageList when recipientId or receiver changes
         const interval = setInterval(() => {
             fetchMessagesList();
-        }, 1000); // Fetch messages every second
-    
+        }, 1000);
+
         return () => clearInterval(interval);
-    }, [recipientId, receiver, messageList]); 
-    
-    useEffect(() => {
-        setMessageList([]);
     }, [recipientId, receiver]);
 
-    //console.log("message list: ", messageList);
+    const fetchMessagesList = async () => {
+        const sentmessages = await getMessages({ recipientId, receiver });
+        if (sentmessages) {
+            const newMessages = sentmessages.filter((message) => (message.receiver.id === recipientId) && (!messageList.find((m) => m.id === message.id)));
+            if (newMessages.length > 0) {
+                const updatedMessages = [...newMessages];
+                setMessageList(updatedMessages);
+            }
+        }
+    };
 
     return (
         <div className="messages-list">

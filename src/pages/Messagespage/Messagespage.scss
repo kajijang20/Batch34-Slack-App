@@ -1,4 +1,9 @@
 .message-page {
+    display: flex;
+
+    .message-page-sidebar {
+        flex: 1;
+    }
     
     .message-page-chat {
         display: flex;
