@@ -1,10 +1,14 @@
-$color-black: rgba(60, 60, 60, 0.7);
+$color-black-1: rgba(60, 60, 60, 0.7);
+$color-black-2: rgba(60, 60, 60, 0.9);
+$color-white: rgb(225, 228, 255);
+$color-violet: rgba(53, 51, 107, 1);
+$color-yellow: rgba(231, 187, 103, 1);
 
 .channels {
     width: 200px;
     height: 100vh;
     text-align: left;
-    background: $color-black;
+    background: $color-black-1;
     padding: 0 0.5rem 0 1rem;
     float: left;
    
@@ -35,12 +39,20 @@ $color-black: rgba(60, 60, 60, 0.7);
     }
 
     .channels-member-header {
-        font-weight: bold;
-        margin: 3rem 0 0 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 1rem;
+        margin: 2rem 0 0 0;
+
+        .add-mem-btn {
+            margin: 1.2rem 0;
+            font-weight: bold;
+            cursor: pointer;
+        }
     }
 
     .channels-members {
-        margin: 0.5rem 0 0 0;
         overflow-y: auto;
         max-height: 13rem;
 
@@ -58,5 +70,65 @@ $color-black: rgba(60, 60, 60, 0.7);
         text-decoration: none;
         color: white;
         cursor: pointer;
+    }
+
+    .channels-add-mem-popup {
+        position: absolute;
+        top: 60vh;
+        left: 70px;
+        //transform: translate(-50%, -50%);
+        background: $color-black-2;
+        //padding: 20px;
+        padding: 1rem;
+        border: 1px solid white;
+
+        .channels-add-mem-popup-input {
+            width: 14rem;
+            height: 9rem;
+
+            input {
+                width: max-contet;
+                background: $color-white;
+                color: $color-black-2;
+                margin: 0 0 1rem 0;
+                padding: 0.5rem 1rem;
+                border-radius: 10px;
+                border: none;
+            }
+        }
+
+        .channels-add-mem-search-dropdown {
+            max-height: 6rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            .channels-add-mem-search-name {
+                font-size: 1rem;
+
+                p {
+                    cursor: pointer;
+                }
+            }
+        }
+        
+        .channels-add-mem-popup-btns {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 1rem 0 0 0;
+
+            button {
+                padding: 0.5rem;
+                border-radius: 10px;
+                cursor: pointer;
+                border: none;
+            }
+
+            .channels-add-mem-popup-add-btn {
+                background: $color-yellow;
+                color: $color-black-2;
+                font-weight: bold;
+            }
+        }
     }
 }
