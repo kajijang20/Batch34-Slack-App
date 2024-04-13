@@ -15,7 +15,6 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
             const channelData = await getChannels();
             //console.log("channeldata: ", channelData);
             setChannels(channelData);
-            //console.log("channeldata type: ", typeof(channelData));
         }
         fetchData();
     }, []);
@@ -54,10 +53,11 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                         </Link>
                     ))}
                 </div>
+                
+                <div className="channels-member-header">
+                    Members in Channel:
+                </div>
                 <div className={`channels-members ${members.length > 5 ? 'scrollable' : ''}`}>
-                    <div className="channels-member-header">
-                        Members in Channel:
-                    </div>
                     {members.map((mems) => (
                         <Link className="item-link"
                             key={mems.id + `-channel`}
@@ -70,7 +70,7 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                         </Link>
                     ))}
                 </div>
-
+                
             </div>
         );
     } else {

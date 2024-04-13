@@ -1,9 +1,7 @@
-import { useState } from "react";
 import getChannelMems from "./getChannelMems";
 
 const getDMUsers = async ({ channels }) => {
     let sortChannelUsers = [];
-    const channelUsers = [];
 
     await Promise.all(channels.map(async (channel) => {
         const getmembers = await getChannelMems({ id: channel.id });

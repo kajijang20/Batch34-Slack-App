@@ -13,7 +13,7 @@ const Channelspage = () => {
     return (
         <div className="channels-page">
             <div className="channels-page-sidebar">
-            <DisplayChannelsList setRecipientId={setRecipientId} setChatName={setChatName} />
+                <DisplayChannelsList setRecipientId={setRecipientId} setChatName={setChatName} />
             </div>
             <div className="channels-page-chat">
                 <div className="channels-page-chat-messages">

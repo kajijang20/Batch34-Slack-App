@@ -25,7 +25,6 @@ $color-black: rgba(60, 60, 60, 0.7);
     .channels-content {
         display: flex; 
         flex-direction: column;
-        margin-top: 1rem;
         font-size: 1rem;
         max-height: 12rem;
         overflow-y: auto;
@@ -35,18 +34,19 @@ $color-black: rgba(60, 60, 60, 0.7);
         }
     }
 
-    .channels-members {
-        margin: 2rem 0 0 0;
-        overflow-y: auto;
+    .channels-member-header {
+        font-weight: bold;
+        margin: 3rem 0 0 0;
+    }
 
-        .channels-member-header {
-            font-weight: bold;
-        }
+    .channels-members {
+        margin: 0.5rem 0 0 0;
+        overflow-y: auto;
+        max-height: 13rem;
 
         .channels-members-name {
             display: flex;
             flex-direction: row;
-
         }
     }
 
