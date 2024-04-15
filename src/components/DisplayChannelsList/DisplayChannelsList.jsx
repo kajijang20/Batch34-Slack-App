@@ -2,100 +2,101 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./DisplayChannelsList.scss";
 
-import { DataAllUsers, DataAddMem } from "../../utils/Api";
+import { DataAllUsers, DataCreateChannel } from "../../utils/Api";
 import getChannels from "../../utils/helper/getChannels";
 import getChannelMems from "../../utils/helper/getChannelMems";
-
-//import AddMember from "../AddMember/AddMember";
-//import handleAddUser from "../../utils/helper/handleAddUser";
+import DisplayChannelMembersList from "../DisplayChannelMembersList/DisplayChannelMembersList";
 
 const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
+    const currentUser = JSON.parse(localStorage.getItem("UserId"));
     const [channels, setChannels] = useState([]);
     const [members, setMembers] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
     const [channelId, setChannelId] = useState([]);
+    
+    const [selectedMembers, setSelectedMembers] = useState([]);
+    const [channelName, setChannelName] = useState("");
+    const [dropdownUsers, setDropdownUsers] = useState([]);
+    const [searchTermChannel, setSearchTermChannel] = useState("");
+    const [showChannelPopup, setShowChannelPopup] = useState(false);
+
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             const channelData = await getChannels();
-            //console.log("channeldata: ", channelData);
             setChannels(channelData);
         }
         fetchData();
     }, []);
 
-    const handleCreateChannel = () => {
-        console.log("handle create channel");
-    }
-
     const handleItemClick = async (item) => {
-        //console.log("item: ", item);
         setChatName(item.name);
         setRecipientId(item.id);
         setChannelId(item.id);
         navigate(`/channels/${item.id}`);
         const membersData = await getChannelMems({ id: item.id });
-        //console.log("membersData: ", membersData);
         setMembers(membersData);
     }
-/*
-    const handleMemberClick = async (mems) => {
-        navigate(`/messages/${mems.id}`);
-    }
-*/
-    const [showPopup, setShowPopup] = useState(false);
-    const [allUsers, setAllUsers] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [dropdownUsers, setDropdownUsers] = useState([]);
-    const [memID, setMemID] = useState("");
-
-    const togglePopup = () => {
-        setShowPopup(!showPopup);
-    }
-
-    const handleAddUser = () => {
-        console.log("handle add user");
-        setSearchTerm("");
-        togglePopup();
-    }
-
-    //console.log("allUsers: ", allUsers);
-
-    const handleSearch = (event) => {
-        const searchValue = event.target.value;
-        setSearchTerm(searchValue);
-        const filteredUsers = allUsers.data.filter(user => user.email.toLowerCase().includes(searchValue.toLowerCase()));
-        setDropdownUsers(filteredUsers);
-    }
-
-    const handleAddMemberUserId = (user) => {
-        setMemID(user.id);
-        togglePopup();
-    }
-
-    //console.log("memID: ", memID);
-    //console.log("channelId: ", channelId);
 
     useEffect(() => {
         const fetchUsers = async () => {
             const allUsersData = await DataAllUsers();
             setAllUsers(allUsersData);
-            if (memID !== "") {
-                const addUser = await DataAddMem({ id: channelId, member_id: memID });
-                //console.log("adduser: ", addUser);
-            }
         };
         fetchUsers();
     }, []);
 
-    ///////////////////////////////////////
+    const toggleCreatePopup = () => {
+        setShowChannelPopup(!showChannelPopup);
+    }
+
+    const createChannel = () => {
+        console.log("handle create channel");
+        setChannelName("");
+        setSearchTermChannel("");
+        toggleCreatePopup();
+    }
+
+    const handleChannelName = (event) => {
+        const setName = event.target.value;
+        setChannelName(setName);
+    }
+
+    const handleSearchChannel = (event) => {
+        const searchValue = event.target.value;
+        setSearchTermChannel(searchValue);
+        const filteredUsers = allUsers.data.filter(user => user.email.toLowerCase().includes(searchValue.toLowerCase()));
+        setDropdownUsers(filteredUsers);
+    }
+
+    const handleAddMember = (user) => {
+        setSelectedMembers([...selectedMembers, user]);
+        setDropdownUsers(dropdownUsers.filter(member => member.id !== user.id));
+    }
+
+    const handleRemoveMember = (user) => {
+        const updatedMembers = selectedMembers.filter(member => member.id !== user.id);
+        setSelectedMembers(updatedMembers);
+    }
+
+    const handleCreateChannel = async () => {
+        setChannelName("");
+        setSearchTermChannel("");
+        toggleCreatePopup();
+        const memberIds = selectedMembers.map((user) => user.id);
+        memberIds.push(currentUser);
+        const createchan = await DataCreateChannel({ name: channelName, user_ids: memberIds });
+        //setChannels([...channels, createchan]);
+    }
+
 
     if (typeof(channels) === "object") {
         return (
             <div className="channels">
                 <div className="channels-header">
                     <h3> Channels </h3>
-                    <button className="channels-btn" onClick={handleCreateChannel}> + </button>
+                    <button className="channels-btn" onClick={createChannel}> + </button>
                 </div>
                 <div className={`channels-content ${channels.length > 5 ? 'scrollable' : ''}`}>
                     {channels.map((item) => (
@@ -109,44 +110,37 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                         </p>
                         </Link>
                     ))}
-                </div>
-                
-                <div className="channels-member-header">
-                    <h3> Members: </h3>
-                    <button className="add-mem-btn" onClick={handleAddUser}> + </button>
-                </div>
-                <div className={`channels-members ${members.length > 5 ? 'scrollable' : ''}`}>
-                    {/*members.map((mems) => (
-                        <Link className="item-link"
-                            key={mems.id + `-channel`}
-                            to={`/messages/${mems.id}`}
-                            onClick={() => handleMemberClick(mems)}
-                        >
-                        <p className="channels-members-name">
-                            User ID: {mems.user_id}
-                        </p>
-                        </Link>
-                    ))*/}
-                    {members.map((mems) => (
-                        <p key={mems.id + `-channel`} className="channels-members-name">
-                            User ID: {mems.user_id}
-                        </p>
-                    ))}
-                </div>
-                {showPopup && (
-                <div className="channels-add-mem-popup">
-                    <div className="channels-add-mem-popup-input">
+                </div>                
+                {showChannelPopup && (
+                <div className="channels-create-channel-popup">
+                    <div className="channels-create-channel-popup-input">
                         <input type="text" 
-                            value={searchTerm}
-                            placeholder="Enter member_ids" 
-                            onChange={handleSearch}                                
+                               value={channelName}
+                               placeholder="Enter channel name" 
+                               onChange={handleChannelName}                                
                         />
-                        {searchTerm.length > 0 && dropdownUsers.length > 0 && (
-                            <div className="channels-add-mem-search-dropdown"> 
+                        <div className="channels-create-channel-popup-selected-members">
+                            Selected Members:
+                            {selectedMembers.map(member => (
+                                <p key={member.id} 
+                                   className="channels-create-channel-popup-selected-member" 
+                                   onClick={() => handleRemoveMember(member)}
+                                >
+                                    {member.email}
+                                </p>
+                            ))}
+                        </div>
+                        <input type="text" 
+                               value={searchTermChannel}
+                               placeholder="Search for members" 
+                               onChange={handleSearchChannel}                                
+                        />
+                        {searchTermChannel.length > 0 && dropdownUsers.length > 0 && (
+                            <div className="channels-create-channel-search-dropdown"> 
                                 {dropdownUsers.map((user, userIndex) => (
-                                    <p className="channels-add-mem-search-name"
+                                    <p className="channels-create-channel-search-name"
                                        key={user.id} 
-                                       onClick={() => handleAddMemberUserId(user)}
+                                       onClick={() => handleAddMember(user)}
                                     >
                                         {user.email}
                                     </p>
@@ -154,12 +148,14 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                             </div>
                         )}
                     </div>
-                    <div className="channels-add-mem-popup-btns">
-                        <button onClick={handleAddUser} className="channels-add-mem-popup-add-btn"> Add Member </button>
-                        <button onClick={togglePopup} className="channels-add-mem-popup-cancel-btn"> Cancel </button>
+                    <div className="channels-create-channel-popup-btns">
+                        <button onClick={handleCreateChannel} className="channels-create-channel-popup-add-btn"> Create Channel </button>
+                        <button onClick={toggleCreatePopup} className="channels-create-channel-popup-cancel-btn"> Cancel </button>
                     </div>
                 </div>
-            )}
+                )}
+
+                <DisplayChannelMembersList members={members} channelId={channelId}/>
             </div>
         );
     } else {
