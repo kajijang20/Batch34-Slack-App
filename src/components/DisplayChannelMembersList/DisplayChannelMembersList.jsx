@@ -2,23 +2,34 @@ import React, { useState, useEffect } from "react";
 import "./DisplayChannelMembersList.scss";
 
 import { DataAllUsers, DataAddMem } from "../../utils/Api";
+import { getHeaders } from "../../utils/helper/getHeaders";
 
 const DisplayChannelMembersList = ({ members, channelId }) => {
-
+    const header = getHeaders();
     const [showPopup, setShowPopup] = useState(false);
     const [allUsers, setAllUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [dropdownUsers, setDropdownUsers] = useState([]);
     const [memID, setMemID] = useState("");
 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const allUsersData = await DataAllUsers();
+            setAllUsers(allUsersData);
+        };
+        fetchUsers();
+    }, []);
+
     const togglePopup = () => {
         setShowPopup(!showPopup);
     }
-
-    const handleAddUser = () => {
-        console.log("handle add user");
-        setSearchTerm("");
-        togglePopup();
+console.log("channel id type: ", typeof(channelId));
+    const addUser = () => {
+        if (typeof(channelId) === "number") {
+            console.log("handle add user");
+            setSearchTerm("");
+            togglePopup();
+        }
     }
 
     const handleSearch = (event) => {
@@ -29,27 +40,26 @@ const DisplayChannelMembersList = ({ members, channelId }) => {
     }
 
     const handleAddMemberUserId = (user) => {
+        setSearchTerm(user.email);
         setMemID(user.id);
-        togglePopup();
     }
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const allUsersData = await DataAllUsers();
-            setAllUsers(allUsersData);
-            if (memID !== "") {
-                const addUser = await DataAddMem({ id: channelId, member_id: memID });
-                //console.log("adduser: ", addUser);
-            }
-        };
-        fetchUsers();
-    }, []);
+    console.log("channelId: ", channelId);
+    console.log("memId: ", memID);
+
+    const handleAddUser = async () => {
+        console.log("handle add user");
+        setSearchTerm("");
+        togglePopup();
+        const addUser = await DataAddMem({ id: channelId, member_id: memID });
+        console.log("adduser: ", addUser);
+    }
 
     return (
         <div>
         <div className="channels-member-header">
             <h3> Members: </h3>
-            <button className="add-mem-btn" onClick={handleAddUser}> + </button>
+            <button className="add-mem-btn" onClick={addUser}> + </button>
         </div>
         <div className={`channels-members ${members.length > 5 ? 'scrollable' : ''}`}>
             {members.map((mems) => (

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import { getHeaders } from "./helper/getHeaders";
+import Homepage from "../pages/Homepage/Homepage";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Channelspage from "../pages/Channelspage/Channelspage";
 import Messagespage from "../pages/Messagespage/Messagespage";
@@ -24,6 +25,10 @@ const AppRouter = () => {
 
     const router = createBrowserRouter([
         {
+            path: "/",
+            element: <Homepage />
+        },
+        {
             path: "/channels",
             element: <PrivateRoute 
                         path="/channels"
@@ -36,7 +41,6 @@ const AppRouter = () => {
                 },
             ],
         },
-        
         {
             path: "/messages",
             element: <PrivateRoute 

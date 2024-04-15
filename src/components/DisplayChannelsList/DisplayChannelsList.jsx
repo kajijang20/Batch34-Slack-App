@@ -12,7 +12,7 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
     const [channels, setChannels] = useState([]);
     const [members, setMembers] = useState([]);
     const [allUsers, setAllUsers] = useState([]);
-    const [channelId, setChannelId] = useState([]);
+    const [channelId, setChannelId] = useState("");
     
     const [selectedMembers, setSelectedMembers] = useState([]);
     const [channelName, setChannelName] = useState("");
@@ -137,7 +137,7 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                         />
                         {searchTermChannel.length > 0 && dropdownUsers.length > 0 && (
                             <div className="channels-create-channel-search-dropdown"> 
-                                {dropdownUsers.map((user, userIndex) => (
+                                {dropdownUsers.map((user) => (
                                     <p className="channels-create-channel-search-name"
                                        key={user.id} 
                                        onClick={() => handleAddMember(user)}
