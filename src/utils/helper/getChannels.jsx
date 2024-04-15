@@ -1,15 +1,13 @@
 import React from "react";
-
 import { DataAllUserschannels } from "../Api";
-import { StarIcon1, StarIcon2, StarIcon3, StarIcon4, StarIcon5 } from "../../assets/icons";
 import { getHeaders } from "./getHeaders";
+import { StarIcon1, StarIcon2, StarIcon3, StarIcon4, StarIcon5 } from "../../assets/icons";
 
 const getChannels = async () => {
     const starIcon = [<StarIcon1 />, <StarIcon2 />, <StarIcon3 />, <StarIcon4 />, <StarIcon5 />];
     const headers = getHeaders();
     const userchannels = [];
     const datausers = await DataAllUserschannels(headers);
-    //console.log("datausers: ", datausers);
 
     if (datausers.hasOwnProperty("errors")) {
         return "[]";
@@ -23,7 +21,6 @@ const getChannels = async () => {
         });
     
         localStorage.setItem("UserChannels", JSON.stringify(userchannels));
-        //console.log("user channels: ", userchannels);
         return userchannels;
     }
 }

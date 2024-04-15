@@ -52,7 +52,7 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
     }
 
     const createChannel = () => {
-        console.log("handle create channel");
+        console.log("create channel");
         setChannelName("");
         setSearchTermChannel("");
         toggleCreatePopup();
@@ -86,18 +86,17 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
         toggleCreatePopup();
         const memberIds = selectedMembers.map((user) => user.id);
         memberIds.push(currentUser);
-        const createchan = await DataCreateChannel({ name: channelName, user_ids: memberIds });
+        await DataCreateChannel({ name: channelName, user_ids: memberIds });
         //setChannels([...channels, createchan]);
     }
 
-
-    if (typeof(channels) === "object") {
-        return (
-            <div className="channels">
-                <div className="channels-header">
-                    <h3> Channels </h3>
-                    <button className="channels-btn" onClick={createChannel}> + </button>
-                </div>
+    return (
+        <div className="channels">
+            <div className="channels-header">
+                <h3> Channels </h3>
+                <button className="channels-btn" onClick={createChannel}> + </button>
+            </div>
+            {typeof(channels) === "object" && (
                 <div className={`channels-content ${channels.length > 5 ? 'scrollable' : ''}`}>
                     {channels.map((item) => (
                         <Link className="item-link"
@@ -110,8 +109,9 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                         </p>
                         </Link>
                     ))}
-                </div>                
-                {showChannelPopup && (
+                </div> 
+            )}               
+            {showChannelPopup && (
                 <div className="channels-create-channel-popup">
                     <div className="channels-create-channel-popup-input">
                         <input type="text" 
@@ -154,23 +154,11 @@ const DisplayChannelsList = ({ setRecipientId, setChatName }) => {
                     </div>
                 </div>
                 )}
-
+            {typeof(channels) === "object" && (
                 <DisplayChannelMembersList members={members} channelId={channelId}/>
-            </div>
-        );
-    } else {
-        return (
-            <div className="channels">
-                <div className="channels-header">
-                    <h3> Channels </h3>
-                    <button className="channels-btn"> + </button>
-                </div>
-                <div className="channels-content">
-                    No channels
-                </div>
-            </div>
-        );
-    }
+            )}
+        </div>
+    );
 }
 
 export default DisplayChannelsList;

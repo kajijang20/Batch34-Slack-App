@@ -104,13 +104,46 @@ const DisplayDMList = ({ setRecipientId, setChatName }) => {
                 </div>
             </div>
         );
+    } else if (filteredUsers.length && !recentUser.length) {
+        return (
+            <div className="dms">
+                <div className="dms-header">
+                    Users List
+                </div>
+                {filteredUsers.length > 0 && (
+                <div className="search-bar">
+                    <input 
+                        type="text"
+                        value={searchTerm} 
+                        onChange={handleSearch} 
+                        placeholder="Search Users" 
+                    />
+                    {searchTerm.length > 0 && displayUsers.length > 0 && (
+                        <div className="search-dropdown">
+                            {displayUsers.map((user, userIndex) => (
+                                <Link className="item-link"
+                                      key={`${user.id}-${userIndex}-dms`}
+                                      to={`/messages/${user.id}`}
+                                      onClick={() => handleItemClick(user)}
+                                >
+                                <p className="search-name">
+                                    {user.email}
+                                </p>
+                            </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
+                )}
+            </div>
+        );
     } else {
         return (
             <div className="dms">
                 <div className="dms-header">
                     Users List
                 </div>
-                Loading...
+                You're not in any channels
             </div>
         );
     }

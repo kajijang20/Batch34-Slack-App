@@ -6,9 +6,20 @@ $color-violet: rgba(53, 51, 107, 1);
     flex-direction: column;
     align-items: center;
 
+    .homepage-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 8rem 0 0 0;
+
+        h2 {
+            margin: -0.3rem 0 0 0;
+        }
+    }
+
     .homepage-content {
         font-size: 1.3rem;
-        margin: 10rem 15rem 1rem 15rem;
+        margin: 1rem 15rem 1rem 15rem;
 
         p {
             display: flex;
@@ -18,18 +29,26 @@ $color-violet: rgba(53, 51, 107, 1);
     }
 
     button {
-        font-size: 4rem;
-        padding: 1rem 3rem;
-        border-radius: 30px;
-        border: none;
+        font-size: 3rem;
         background-color: $color-violet;
-        transition: all ease 0.3s;
-        cursor: pointer;
-
+        padding: 1rem 3rem;
+        border: 0 solid;
+        border-radius: 20px;
+        box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+        outline: 0.1rem solid;
+        outline-color: rgba(255, 255, 255, .5);
+        outline-offset: 0px;
+        text-shadow: none;
+        transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+          
         &:hover {
             background-color: $color-yellow;
             color: black;
-            padding: 2rem 4rem;
+            border: 1px solid;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+            outline-color: rgba(255, 255, 255, 0);
+            outline-offset: 15px;
+            text-shadow: 1px 1px 2px #427388; 
         }
     }
 }
