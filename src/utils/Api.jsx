@@ -113,7 +113,7 @@ export const DataChannelDetails = async ({ id }) => {
 }
 
 export const DataAddMem = async ({ id, member_id }) => {
-    const response = await fetch(`${base_url}/channels/add_member`, {
+    const response = await fetch(`${base_url}/channel/add_member`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
