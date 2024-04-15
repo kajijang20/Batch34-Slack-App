@@ -25,6 +25,7 @@ const DisplayChat = ({ recipientId, receiver, chatname }) => {
             if (newMessages.length > 0) {
                 const updatedMessages = [...newMessages];
                 setMessageList(updatedMessages);
+                messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
             }
         }
     };

@@ -6,22 +6,16 @@ $color-lavender: rgb(141, 151, 220);
 $color-violet: rgba(53, 51, 107, 1);
 
 .messages-sent {
-    width: 100%;
     height: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     //background-image: url("../../assets/login-pattern.jpg");
     background: $color-black-1;
     padding: 0 2rem;
     float: left;
-/*
-    .messages-list-header {
-        font-weight: bold;
-        font-size: 2rem;
-        text-align: center;
-        padding: 0.5rem 0;
-    }
-*/
+
     .messages-sent-main {
         display: flex;
         background: $color-white-1;

@@ -1,5 +1,4 @@
 .message-page {
-    display: flex;
 
     .message-page-sidebar {
         flex: 1;
@@ -7,7 +6,6 @@
     
     .message-page-chat {
         display: flex;
-        //flex-grow: 1;
         flex-direction: column;
 
         .message-page-chat-messages {
@@ -18,6 +16,8 @@
         .message-page-chat-send {
             display: flex;
             flex-grow: 1;
+
+            
         }
     }
 }

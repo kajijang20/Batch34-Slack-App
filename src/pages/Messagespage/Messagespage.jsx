@@ -6,20 +6,20 @@ import DisplayChat from "../../components/DisplayChat/DisplayChat";
 import SendMessages from "../../components/SendMessages/SendMessages";
 
 const Messagespage = () => {
-    const [dmId, setDmId] = useState(0);
-    const [chatEmail, setChatEmail] = useState("<User Email>");
+    const [recipientId, setRecipientId] = useState(0);
+    const [chatName, setChatName] = useState("<Chat Email>");
 
     return (
-        <div className="message">
+        <div className="message-page">
             <div className="message-page-sidebar">
-                <DisplayDMList setRecipientId={setDmId} setChatName={setChatEmail}/>
+                <DisplayDMList setRecipientId={setRecipientId} setChatName={setChatName}/>
             </div>
             <div className="message-page-chat">
                 <div className="message-page-chat-messages">
-                    <DisplayChat recipientId={dmId} receiver="User" chatname={chatEmail}/>
+                    <DisplayChat recipientId={recipientId} receiver="User" chatname={chatName}/>
                 </div>
                 <div className="message-page-chat-send">
-                    <SendMessages recipientId={dmId} receiver="User"/>
+                    <SendMessages recipientId={recipientId} receiver="User"/>
                 </div>
             </div>
         </div>

@@ -1,0 +1,35 @@
+$color-yellow: rgb(231, 187, 103);
+$color-violet: rgba(53, 51, 107, 1);
+
+.homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .homepage-content {
+        font-size: 1.3rem;
+        margin: 10rem 15rem 1rem 15rem;
+
+        p {
+            display: flex;
+            justify-content: flex-end;
+            margin: -1rem 0 0 0;
+        }
+    }
+
+    button {
+        font-size: 4rem;
+        padding: 1rem 3rem;
+        border-radius: 30px;
+        border: none;
+        background-color: $color-violet;
+        transition: all ease 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $color-yellow;
+            color: black;
+            padding: 2rem 4rem;
+        }
+    }
+}
