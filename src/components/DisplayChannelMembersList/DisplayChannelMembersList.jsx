@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./DisplayChannelMembersList.scss";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { DataAllUsers, DataAddMem } from "../../utils/Api";
 import { getHeaders } from "../../utils/helper/getHeaders";
 
@@ -23,12 +26,14 @@ const DisplayChannelMembersList = ({ members, channelId }) => {
     const togglePopup = () => {
         setShowPopup(!showPopup);
     }
-console.log("channel id type: ", typeof(channelId));
+
     const addUser = () => {
         if (typeof(channelId) === "number") {
             console.log("handle add user");
             setSearchTerm("");
             togglePopup();
+        } else {
+            toast.error("Please click on a channel first.");
         }
     }
 
@@ -57,6 +62,7 @@ console.log("channel id type: ", typeof(channelId));
 
     return (
         <div>
+        <ToastContainer/>
         <div className="channels-member-header">
             <h3> Members: </h3>
             <button className="add-mem-btn" onClick={addUser}> + </button>
