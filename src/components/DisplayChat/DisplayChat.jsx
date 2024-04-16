@@ -19,13 +19,16 @@ const DisplayChat = ({ recipientId, receiver, chatname }) => {
     }, [recipientId, receiver]);
 
     const fetchMessagesList = async () => {
+        //console.log("recipient ID: ", recipientId);
         const sentmessages = await getMessages({ recipientId, receiver });
+        //console.log("sent messges: ", sentmessages);
         if (sentmessages) {
-            const newMessages = sentmessages.filter((message) => (message.receiver.id === recipientId) && (!messageList.find((m) => m.id === message.id)));
+            const newMessages = sentmessages.filter((message) => (!messageList.find((m) => m.id === message.id)));
             if (newMessages.length > 0) {
                 const updatedMessages = [...newMessages];
                 setMessageList(updatedMessages);
                 messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+                //console.log("newMessages: ", newMessages);
             }
         }
     };

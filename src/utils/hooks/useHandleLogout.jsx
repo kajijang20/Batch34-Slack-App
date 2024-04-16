@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-const HandleLogout = () => {
+const useHandleLogout = () => {
     const navigate = useNavigate();
     console.log("redirecting to login");
     navigate("/login");
 }
 
-export default HandleLogout;
+export default useHandleLogout;

@@ -11,7 +11,6 @@ const getDMUsers = async ({ channels }) => {
         });
     }));
 
-    let starIndex = 0;
     sortChannelUsers = sortChannelUsers.sort((a, b) => a - b)
         .filter((value, index) => sortChannelUsers.indexOf(value) === index);
 

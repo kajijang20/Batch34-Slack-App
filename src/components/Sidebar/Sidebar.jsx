@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 
 import { SidebarLogo, HomeIcon, MessagesIcon, LogoutIcon } from "../../assets/icons";
-import HandleLogout from "../../utils/helper/handleLogout";
+import useHandleLogout from "../../utils/hooks/useHandleLogout";
 
 const NavItems = [
     {
@@ -30,7 +30,7 @@ const Sidebar = () => {
     const handleItemClick = (item) => {
         setCurrentPage(item.name);
         if (item.name === "Logout") {
-          HandleLogout();
+          useHandleLogout();
         }
     }
 
