@@ -1,8 +1,17 @@
-# React + Vite
+# Avion School - Batch 34 - Frontend Final Project -- Slack App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the final project for the frontend course of Avion School, batch 34
 
-Currently, two official plugins are available:
+These are the following dependencies needed:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Toastify
+
+npm install --save react-toastify
+
+https://www.npmjs.com/package/react-toastify
+
+2. React-Router-Dom
+
+npm i react-router-dom
+
+https://www.npmjs.com/package/react-router-dom 
